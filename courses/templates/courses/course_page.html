@@ -1,0 +1,187 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+{% load course_custom_tags %}
+
+{%block title%}
+Courses
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'courses/css/scrollbar.css'%}">
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'courses/js/course_page.js' %}"></script>
+{% endblock %}
+
+{%block content%}
+
+<style>
+    .no-preview{
+        cursor: not-allowed;
+    }   
+    a:hover{
+        text-decoration: none;
+    }
+
+    a{
+        color: rgb(61, 59, 59);
+    }
+
+    .active-video{
+        background-color: rgb(79 70 229);
+    }
+    .active-video-link{
+        color: rgb(255, 255, 255);
+    }
+
+    .list-group-item a:hover{
+        color: rgb(79 70 229)
+    }
+    
+</style>
+<section class="text-gray-600 body-font mx-12">
+    <div class="px-5 py-24 mx-auto flex flex-wrap">
+      <div class="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
+        <iframe id='player' class="mx-auto" width="100%" height="450"
+            src="https://www.youtube.com/embed/{{video.video_id}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+      </div>
+      <div class="flex flex-col flex-wrap -mb-10 lg:w-1/2 lg:pl-12 rounded-lg lg:text-left text-center ">
+        <div class="col-3">
+            
+            <div class="w-full text-gray-900 bg-white border border-gray-200 rounded-lg ">
+                {% is_enrolled request course as enrolled %}
+                {% for v in videos %}
+                <a href="?lecture={{v.serial_number}}" aria-current="true" class="block w-full px-4 py-2 text-black border-b border-gray-200 cursor-pointer {% if v == video %} bg-indigo-500 text-white {% endif %} {% if not enrolled and not v.is_preview %} text-gray-500 no-preview {% endif %}
+                {% if v == video %} active-video-link {% endif %}
+                {% if forloop.counter == 1 %}rounded-t-lg {% endif %}">
+                   {{v}}
+                </a>
+                {% endfor %}
+                
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+        <!-- <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2> -->
+        <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{course.name}}</h1>
+        <div class="flex mb-4">
+          <span class="flex items-center">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <span class="text-gray-600 ml-3">4 Reviews</span>
+          </span>
+          <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
+            <a class="text-gray-500">
+              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+              </svg>
+            </a>
+            <a class="text-gray-500">
+              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+              </svg>
+            </a>
+            <a class="text-gray-500">
+              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+              </svg>
+            </a>
+          </span>
+        </div>
+        <p class="leading-relaxed">{{course.description}}</p>
+        <div class="mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Prerequisite</h5>
+                    <p class="card-text">
+                    <ol>
+                        {% for pre in course.prerequisite_set.all %}
+                        <li class="">{{pre.description}}</li>
+                        {% endfor %}
+                    </ol>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Learnings</h5>
+                    <p class="card-text">
+                    <ol>
+                        {% for l in course.learning_set.all %}
+                        <li class="">{{l.description}}</li>
+                        {% endfor %}
+                    </ol>
+                    </p>
+                </div>
+            </div>
+        </div>
+      </div>
+
+<div class="flex flex-wrap">
+    <div class="lg:w-2/5 lg:mx-12 relative overflow-x-auto">
+        <table class="w-full text-sm text-left bg-indigo-500 border-2">
+            <thead class="text-xs text-white uppercase">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Prerequisite
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pre in course.prerequisite_set.all %}
+                <tr class="bg-white border-b ">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            {{pre.description}}
+                        </th>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="lg:w-2/5 lg:mx-12 relative overflow-x-auto">
+        <table class="w-full text-sm text-left bg-indigo-500 border-2">
+            <thead class="text-xs text-white uppercase  ">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Learnings
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for l in course.learning_set.all %}
+                <tr class="bg-white border-b ">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            {{l.description}}
+                        </th>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+  </section>
+
+{%endblock%}
+
