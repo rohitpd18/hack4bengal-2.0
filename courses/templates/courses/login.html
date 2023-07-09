@@ -26,20 +26,20 @@ Login
             <form class="space-y-4 md:space-y-6" action="#" method="POST">
                   {% csrf_token %}
                    <div>
-                       <label for="{{ form.email.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
-                       <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="name@company.com" value="{{ form.email.value }}" required>
+                       <label for="username" class="block mb-2 text-sm font-medium text-gray-900 ">Your username</label>
+                       <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="name@company.com" required>
                    </div>
                    <div>
-                       <label for="{{ form.password.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
-                       <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" value="{{ form.password.value }}" required="">
+                       <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
+                       <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required="">
                    </div>
                    <div class="flex items-center justify-between">
                        <div class="flex items-start">
                            <div class="flex items-center h-5">
-                             <input id="showpass" aria-describedby="showpass"  id="show-password-checkbox" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" required="">
+                             <input aria-describedby="showpass"  id="show-password-checkbox" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" onclick="togglePasswordVisibility()">
                            </div>
                            <div class="ml-3 text-sm">
-                             <label for="showpass" class="text-gray-500">Show password</label>
+                             <label for="show-password-checkbox" class="text-gray-700">Show password</label>
                            </div>
                        </div>
                        <a href="#" class="text-sm font-medium text-blue-600 hover:underline -500">Forgot password?</a>

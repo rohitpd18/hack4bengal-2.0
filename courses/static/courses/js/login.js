@@ -1,13 +1,12 @@
-const showPasswordCheckbox = document.getElementById('show-password-checkbox');
-const passwordInput = document.getElementById('password');
+console.log("hiffii")
 
-console.log("hiii")
-
-showPasswordCheckbox.addEventListener('change', function() {
-    // console.log("hiii")
+function togglePasswordVisibility() {
+    var passwordField = document.getElementById("password");
+    var showPasswordCheckbox = document.getElementById("show-password-checkbox");
+  
     if (showPasswordCheckbox.checked) {
-        passwordInput.type = 'text';
+      passwordField.type = "text";
     } else {
-        passwordInput.type = 'password';
+      passwordField.type = "password";
     }
-});
+  }
