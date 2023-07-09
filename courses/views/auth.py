@@ -7,7 +7,7 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.models import User
 
 def signup(request):
-    print(request.POST)
+    # print(request.POST)
     if request.method == 'POST':
         user = User.objects.create_user(username=request.POST['username'], password=request.POST['password'])
         user.first_name = request.POST['fname']
@@ -23,10 +23,24 @@ def login_view(request):
         print(user)
         if user:
             login(request, user)
-            return redirect('home')
+            login_success = 'Sign in successful! Welcome to ThreadAcademy'
+            context = {
+                'login_success': login_success
+            }
+            return render(request,'courses/home.html', context)
         else:
-            return render(request, 'courses/login.html', {'error': 'Invalid username or password.'})
-    return render(request, 'courses/login.html', {'error': 'Invalid username or password.'})
+            error_message = 'Invalid credentials. Please try again.'
+            context = {
+                'error_message': error_message
+            }
+
+            return render(request, 'courses/login.html', context)
+        
+    show_signin_message = 'Please sign in to continue'
+    context = {
+        'show_signin_message': show_signin_message
+    }
+    return render(request, 'courses/login.html',context)
 
 # @require_http_methods(['GET', 'POST'])
 # def login_view(request):
