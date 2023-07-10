@@ -22,7 +22,8 @@ def login_view(request):
     if request.method == 'POST':
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         print(user)
-        if user:
+        if user is not None:
+            print("hi")
             login(request, user)
             login_success = 'Sign in successful! Welcome to ThreadAcademy'
             context = {
@@ -30,10 +31,12 @@ def login_view(request):
             }
             return redirect("home")
         else:
+
             error_message = 'Invalid credentials. Please try again.'
             context = {
                 'error_message': error_message
             }
+            print(context)
 
             return render(request, 'courses/login.html', context)
         
