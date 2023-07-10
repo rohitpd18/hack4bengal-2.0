@@ -1,11 +1,12 @@
 
 from django.contrib import admin
 from django.urls import path , include
-from courses.views import  MyCoursesList,  HomePageView ,verifyPayment , coursePage, signup  , login_view , signout , checkout, profile,creater, become_creater
+from courses.views import  MyCoursesList,  HomePageView ,verifyPayment , coursePage, signup  , login_view , signout , checkout, profile,creater,Coursetab, become_creater
 from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
     path('', HomePageView.as_view() , name = 'home'),
+    path('courses', Coursetab , name = 'course-tab'),
     path('my-courses', MyCoursesList.as_view() , name = 'my-courses'),
     path('signup', signup , name = 'signup'),
     path('login', login_view , name = 'login'),

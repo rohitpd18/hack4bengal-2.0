@@ -3,4 +3,4 @@ from django.contrib.auth.models import User
 
 def creater(request):
     user= User.objects.get(username=request.user)
-    return render(request, 'courses/creater.html', user=user)
+    return render(request, 'creater/dashboard.html', {'user':user})

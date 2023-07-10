@@ -15,6 +15,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- <link rel="stylesheet" href="{% static 'courses/css/common.css'%}"> -->
     {% block css %} {% endblock %}
+    <script
+      src="https://d1w019qw3bn26k.cloudfront.net/assets/application-36cc4d3a5057107d54fe38a7a94af73e6d8491983e96c24489b0de37dd2c81a6.js"
+      data-turbo-track="reload"
+      defer="defer"
+    ></script>
     <title>Courses</title>
   </head>
   <body class="bg-stone-100 overflow-x-hidden">
@@ -26,7 +31,7 @@
       >
         <a href="/" class="flex items-center">
           <img
-            src="{% static 'courses/images/logo.png'%}"
+            src="{% static 'courses/images/logo.svg'%}"
             class="h-8 mr-3"
             alt="ThreadAcademy Logo"
           />
@@ -252,7 +257,7 @@
           </div>
         </div>
       </div>
-	  <hr>
+      <hr />
       <div class="bg-white">
         <div
           class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col"

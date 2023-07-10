@@ -95,3 +95,5 @@ def become_creater(request):
     add_user_to_group(user, group_name)
     return HttpResponse("creater's dashboard")
 
+def Coursetab(request):
+    return render(request, 'courses/course_tab.html')
