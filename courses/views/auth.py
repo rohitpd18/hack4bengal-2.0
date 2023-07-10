@@ -5,6 +5,10 @@ from django.views.decorators.http import require_http_methods
 from django.views import View
 from django.views.generic.edit import FormView
 from django.contrib.auth.models import User
+from django.urls import reverse
+from django.contrib import messages
+from urllib.parse import urlencode
+from django.http import HttpResponseRedirect
 
 def signup(request):
     # print(request.POST)
@@ -18,6 +22,7 @@ def signup(request):
     return render(request, 'courses/signup.html')
     
 def login_view(request):
+    message=[]
     if request.method == 'POST':
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         print(user)
@@ -27,8 +32,12 @@ def login_view(request):
             context = {
                 'login_success': login_success
             }
-            return render(request,'courses/home.html', context)
+            message.append(messages.success(request, 'Login successful!'))
+            # messages.success(request, 'Login successful!')
+            return redirect('home')
+
         else:
+            message=[]
             error_message = 'Invalid credentials. Please try again.'
             context = {
                 'error_message': error_message
@@ -42,31 +51,12 @@ def login_view(request):
     }
     return render(request, 'courses/login.html',context)
 
-# @require_http_methods(['GET', 'POST'])
-# def login_view(request):
-#     template_name = "courses/login.html"
-#     form = LoginForm(request.POST or None)
-#     next_page = request.GET.get('next')
-
-    
-#     if request.method=="POST":
-#         email=request.post.get("email")
-#         password=request.post.get("password")
-        
-#     if form.is_valid():
-#         login(request, form.cleaned_data)
-#         if next_page is not None:
-#             return redirect(next_page)
-#         return redirect('/')
-
-#     context = {
-#         'form': form,
-#     }
-#     return render(request, template_name, context)
-
-
 
 def signout(request ):
     logout(request)
+    messages= None
     return redirect("home")
+
+def become_creater(request):
+    pass
 
