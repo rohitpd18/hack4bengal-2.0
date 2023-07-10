@@ -1,14 +1,11 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect, HttpResponse
 from django.contrib.auth import logout , login, authenticate
 from courses.forms import RegistrationForm , LoginForm
 from django.views.decorators.http import require_http_methods
-from django.views import View
 from django.views.generic.edit import FormView
 from django.contrib.auth.models import User
-from django.urls import reverse
 from django.contrib import messages
-from urllib.parse import urlencode
-from django.http import HttpResponseRedirect
+from django.contrib.auth.models import Group
 
 def signup(request):
     # print(request.POST)
@@ -54,9 +51,47 @@ def login_view(request):
 
 def signout(request ):
     logout(request)
-    messages= None
     return redirect("home")
 
+# user profile
+def profile(request):
+    user= request.user
+    if user.is_authenticated is False:
+        return redirect('login')
+    is_creater= check_user_group(user, 'creater')
+    return render(request, 'courses/profile.html',{is_creater:is_creater})
+
+    
+
+# funtion for setting a user as a creater
+def add_user_to_group(user, group_name):
+    try:
+        group = Group.objects.get(name=group_name)
+        group.user_set.add(user)
+        print(f"User {user.username} added to group {group_name} successfully.")
+    except Group.DoesNotExist:
+        print(f"Group {group_name} does not exist.")
+
+
+# checking user is creatar or not
+def check_user_group(user, group_name):
+    try:
+        group = Group.objects.get(name=group_name)
+        if group in user.groups.all():
+            print(f"User {user.username} belongs to group {group_name}.")
+            return True
+        else:
+            print(f"User {user.username} does not belong to group {group_name}.")
+            return False
+
+    except Group.DoesNotExist:
+        print(f"Group {group_name} does not exist.")
+
 def become_creater(request):
-    pass
+    group_name= "creater"
+    user= request.user
+    if user is "AnonymousUser":
+        return redirect('/login')    
+    add_user_to_group(user, group_name)
+    return HttpResponse("creater's dashboard")
 
