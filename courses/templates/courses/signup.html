@@ -21,7 +21,7 @@ Login
       <div class="w-full bg-white rounded-lg shadow-xl sm:max-w-md xl:p-0 -800 ">
          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
-               Sign in to your account
+               Sign Up for Free
             </h1>
             <form class="space-y-4  md:space-y-6" action="/signup" method="POST">
                   {% csrf_token %}
@@ -56,15 +56,15 @@ Login
                    <div class="flex items-center justify-between">
                        <div class="flex items-start">
                            <div class="flex items-center h-5">
-                             <input id="showpass" aria-describedby="showpass"  id="show-password-checkbox" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" required="">
+                             <input id="showpass" aria-describedby="showpass"  id="show-password-checkbox" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300">
                            </div>
                            <div class="ml-3 text-sm">
                              <label for="showpass" class="text-gray-500">Show password</label>
                            </div>
                        </div>
-                       <a href="#" class="text-sm font-medium text-blue-600 hover:underline -500">Forgot password?</a>
+      
                    </div>
-                   <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center -600 -blue -blue-800">Sign in</button>
+                   <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center -600 -blue -blue-800">Sign Up</button>
 
                     <!-- Divider -->
           <div
@@ -130,7 +130,7 @@ Login
 
 
                    <p class="text-sm font-light text-gray-500">
-                       Don’t have an account yet? <a href="#" class="font-medium text-blue-600 hover:underline -500">Sign up</a>
+                      Already have an account? <a href="/login" class="font-medium text-blue-600 hover:underline -500">Sign in</a>
                    </p>
                </form>
            </div>

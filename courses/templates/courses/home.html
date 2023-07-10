@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load course_custom_tags %}
 {% load static %}
-{%block title%}Courses
+{%block title%}Home
 {% endblock %}
 
 {%block content%}
@@ -20,8 +20,7 @@
 <!-- hero section start-->
 
   <!-- Hero -->
-
-  {% if message %}
+  {% comment %} {% if message %}
 
   <div class="bg-green-100 text-green-600 px-4 py-3 rounded relative" role="alert" id="comp-sign">
     <strong class="font-bold">Success!</strong>
@@ -31,24 +30,24 @@
     </span>
   </div>
 
-  {% endif %}
+  {% endif %} {% endcomment %}
 
 <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 mt-4">
   <!-- Grid -->
   <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
-    <div>
+    <div clss="order-2">
       <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight ">Start your journey with <span class="text-indigo-500">ThreadAcademy</span></h1>
       <p class="mt-3 text-lg text-gray-800 ">Whether you are a creator or learner, we have got you covered.</p>
 
       <!-- Buttons -->
       <div class="mt-7 grid gap-3 w-full sm:inline-flex">
-        <a class="inline-flex justify-center items-center gap-x-3 text-center bg-indigo-600 hover:bg-indigo-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 " href="#">
+        <a class="inline-flex justify-center items-center gap-x-3 text-center bg-indigo-600 hover:bg-indigo-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 " href="/courses">
           Get started
           <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </a>
-        <a class="inline-flex justify-center items-center gap-x-3.5 text-sm lg:text-base text-center border  hover:border-gray-300 shadow-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4" href="#">
+        <a class="inline-flex justify-center items-center gap-x-3.5 text-sm lg:text-base text-center border  hover:border-gray-300 shadow-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4" href="/contact">
           Contact us
         </a>
       </div>
@@ -57,8 +56,8 @@
     </div>
     <!-- End Col -->
 
-    <div class="relative ml-4">
-      <img class="w-full rounded-md  transition duration-300 delay-300 rotate-45 hover:-rotate-[10]" src="{% static "courses/images/side1.png" %}" alt="Image Description">
+    <div class="relative ml-4 order-1">
+      <img class="w-full rounded-md  transition duration-300 delay-300 rotate-45 hover:-rotate-[10]" src="{% static 'courses/images/side1.png' %}" alt="Image Description">
       {% comment %} <div class="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-md mt-4 -mb-4 mr-4 -ml-4 lg:mt-6 lg:-mb-6 lg:mr-6 lg:-ml-6 "></div> {% endcomment %}
 
       <!-- SVG-->

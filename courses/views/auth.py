@@ -19,7 +19,6 @@ def signup(request):
     return render(request, 'courses/signup.html')
     
 def login_view(request):
-    message=[]
     if request.method == 'POST':
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         print(user)
@@ -29,12 +28,8 @@ def login_view(request):
             context = {
                 'login_success': login_success
             }
-            message.append(messages.success(request, 'Login successful!'))
-            # messages.success(request, 'Login successful!')
-            return redirect('home')
-
+            return redirect("home")
         else:
-            message=[]
             error_message = 'Invalid credentials. Please try again.'
             context = {
                 'error_message': error_message
@@ -94,6 +89,3 @@ def become_creater(request):
         return redirect('/login')    
     add_user_to_group(user, group_name)
     return HttpResponse("creater's dashboard")
-
-def Coursetab(request):
-    return render(request, 'courses/course_tab.html')
