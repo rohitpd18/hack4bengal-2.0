@@ -43,4 +43,14 @@ def coursePage(request , slug):
         'videos':videos
     }
     return  render(request , template_name="courses/course_page.html" , context=context )    
-    
+
+
+def Coursetab(request):
+    short_by= request.GET.get('q')
+    courses=''
+    if short_by:
+        courses= Course.objects.order_by(short_by)
+    else:
+        courses= Course.objects.all()
+    print(short_by)
+    return render(request, 'courses/course_tab.html',{"courses": courses})

@@ -1,0 +1,522 @@
+{% extends 'base.html' %} {% load static %} {% load course_custom_tags %}
+{%block title%} Courses {% endblock %} {% block css %}
+<link rel="stylesheet" href="{% static 'courses/css/scrollbar.css'%}" />
+
+{% endblock %}
+ {% block js %} 
+ {% endblock %}
+ 
+ {%block content%}
+
+<div class="min-h-screen overflow-hidden">
+  <div class="relative overflow-hidden bg-gradient-to-b to-white">
+    <div class="relative pb-4">
+      <main class="px-4 mx-auto mt-10 max-w-7xl sm:mt-14">
+        <div class="text-center">
+          <h1
+            class="font-display text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl xl:text-6.5xl"
+          >
+            Trending Courses on ThreadAcademy
+          </h1>
+          <p
+            class="max-w-md mx-auto mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl"
+          >
+            Tailwind Awesome is a curated list of the best Tailwind templates
+            &amp; UI kits in the internet. We are actively searching, and
+            curating the st resources out there.
+          </p>
+          <div class="relative max-w-3xl px-4 mx-auto mt-10 sm:px-6">
+            <form action="/" accept-charset="UTF-8" method="get">
+              <input
+                value="all"
+                autocomplete="off"
+                type="hidden"
+                name="price"
+                id="price"
+              />
+              <input
+                value="template"
+                autocomplete="off"
+                type="hidden"
+                name="type"
+                id="type"
+              />
+              <input
+                value="any"
+                autocomplete="off"
+                type="hidden"
+                name="technology"
+                id="technology"
+              />
+              <input
+                value="trending"
+                autocomplete="off"
+                type="hidden"
+                name="order"
+                id="order"
+              />
+
+              <div
+                class="relative w-full max-w-xl mx-auto bg-white rounded-full h-18 lg:max-w-none"
+              >
+                <input
+                  placeholder="e.g. Blog"
+                  class="rounded-full w-full h-[70px] bg-transparent py-0 pl-8 pr-32 outline-none border-2 border-gray-100 shadow-md hover:outline-none focus:ring-indigo-200 focus:border-indigo-200"
+                  type="text"
+                  name="query"
+                  id="query"
+                />
+                <button
+                  type="submit"
+                  class="absolute inline-flex items-center h-12 px-4 py-2 text-sm text-white transition duration-300 ease-in-out rounded-full outline-none right-3 top-3 bg-indigo-600 sm:px-6 sm:text-base sm:font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  <svg
+                    class="-ml-0.5 sm:-ml-1 mr-2 w-4 h-4 sm:h-5 sm:w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    ></path>
+                  </svg>
+                  Search
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div
+    class="max-w-3xl px-4 pt-8 mx-auto lg:max-w-screen-xl sm:pt-10 sm:px-6 lg:px-8"
+  >
+    <div class="flex flex-row flex-wrap items-center justify-between">
+      <div class="sm:w-1/2 lg:w-1/3">
+        <div
+          class="relative inline-block text-left sm:w-52"
+          data-controller="toggle"
+          data-action="click@window->toggle#clickAway"
+        >
+          <div class="">
+            <button
+              type="button"
+              class="inline-flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 shadow-sm rounded-2lg hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300"
+              aria-haspopup="true"
+              aria-expanded="true"
+              data-action="click->toggle#toggle"
+            >
+              Trending
+              <!-- Heroicon name: solid/chevron-down -->
+              <svg
+                class="w-5 h-5 ml-2 -mr-1 text-gray-500"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
+
+          <div
+            class="absolute left-0 z-10 w-56 mt-2 overflow-hidden origin-top-right bg-white divide-y divide-gray-100 shadow-lg rounded-2lg ring-1 ring-black ring-opacity-5 hidden"
+            data-toggle-target="toggleable toggleArea"
+            x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="transform opacity-0 scale-95"
+            x-transition:enter-end="transform opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="transform opacity-100 scale-100"
+            x-transition:leave-end="transform opacity-0 scale-95"
+          >
+            <div
+              class="py-2"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="options-menu"
+            >
+              <a
+                class="font-semibold text-indigo-600 hover:text-indigo-700 relative block px-4 py-2 text-sm hover:bg-indigo-100"
+                role="menuitem"
+                href="/?order=trending&amp;price=all&amp;type=template"
+              >
+                Trending
+                <span
+                  class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                >
+                  <!-- Heroicon name: solid/check -->
+                  <svg
+                    class="w-5 h-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </span>
+              </a>
+              <a
+                class="font-normal text-gray-700 hover:text-gray-900 relative block px-4 py-2 text-sm hover:bg-indigo-100"
+                role="menuitem"
+                href="/?order=popular&amp;price=all&amp;type=template"
+              >
+                Popular
+              </a>
+              <a
+                class="font-normal text-gray-700 hover:text-gray-900 relative block px-4 py-2 text-sm hover:bg-indigo-100"
+                role="menuitem"
+                href="/?order=newest&amp;price=all&amp;type=template"
+              >
+                Newest
+              </a>
+            </div>
+            <div
+              class="py-2"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="options-menu"
+            >
+              <a
+                class="font-normal text-gray-700 hover:text-gray-900 relative block px-4 py-2 text-sm hover:bg-indigo-100"
+                role="menuitem"
+                href="/?order=price_high&amp;price=premium&amp;type=template"
+              >
+                Price high
+              </a>
+              <a
+                class="font-normal text-gray-700 hover:text-gray-900 relative block px-4 py-2 text-sm hover:bg-indigo-100"
+                role="menuitem"
+                href="/?order=price_low&amp;price=premium&amp;type=template"
+              >
+                Price low
+              </a>
+              <a
+                class="font-normal text-gray-700 hover:text-gray-900 relative block px-4 py-2 text-sm hover:bg-indigo-100"
+                role="menuitem"
+                href="/?price=free&amp;type=template"
+              >
+                Free
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="order-last w-full pt-4 mt-4 border-t border-gray-200 lg:border-0 lg:mt-0 lg:pt-0 lg:order-none lg:w-1/3 sm:flex sm:flex-col sm:align-center"
+      >
+        <div class="relative self-center bg-gray-100 rounded-2lg p-0.5 flex">
+          <a
+            class="border-transparent hover:text-gray-900 flex justify-center relative w-1/3 rounded-2lg py-2 text-sm font-medium text-gray-700 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:z-10 sm:w-1/3 sm:px-8"
+            href="/?type=all"
+            >All</a
+          >
+          <a
+            class="bg-white border-gray-200 shadow-sm flex justify-center relative w-1/3 rounded-2lg py-2 text-sm font-medium text-gray-700 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:z-10 sm:w-1/3 sm:px-8 ml-0.5"
+            href="/?type=template"
+            >Templates</a
+          >
+          <a
+            class="border-transparent hover:text-gray-900 ml-0.5 flex justify-center relative w-1/3 rounded-2lg py-2 text-sm font-medium text-gray-700 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:z-10 sm:w-1/3 sm:px-8"
+            href="/?type=kit"
+            >UI kits</a
+          >
+        </div>
+      </div>
+
+      <div class="sm:w-1/2 lg:w-1/3">
+        <div class="ml-auto sm:w-52">
+          <div
+            class="relative"
+            data-controller="toggle"
+            data-action="click@window->toggle#clickAway"
+          >
+            <button
+              type="button"
+              aria-haspopup="true"
+              aria-expanded="true"
+              class="relative w-full py-2 pl-4 pr-10 text-sm font-medium text-left text-gray-700 bg-white border border-gray-300 shadow-sm cursor-pointer rounded-2lg focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300 hover:bg-gray-50 hover:text-gray-900"
+              data-action="click->toggle#toggle"
+            >
+              <span class="flex items-center">
+                <span class="block truncate"> Sort by </span>
+              </span>
+              <span
+                class="absolute inset-y-0 right-0 flex items-center pr-3 ml-3 pointer-events-none"
+              >
+                <!-- Heroicon name: solid/selector -->
+                <svg
+                  class="w-5 h-5 text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              class="absolute z-10 hidden w-full mt-1 bg-white shadow-lg rounded-2lg"
+              data-toggle-target="toggleable toggleArea"
+              x-transition:enter=""
+              x-transition:enter-start=""
+              x-transition:enter-end=""
+              x-transition:leave="transition ease-in duration-100"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+            >
+              <div
+                class="py-2 overflow-auto text-base max-h-56 rounded-2lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              >
+                <a
+                  class="block select-none relative py-2 pl-3 pr-9 hover:bg-indigo-100 hover:text-gray-900 cursor-pointer text-sm"
+                  role="menuitem"
+                  href="/?technology=any&amp;type=template"
+                >
+                  <div class="flex items-center">
+                    <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                    <span
+                      class="font-semibold text-indigo-600 hover:text-indigo-700 block truncate"
+                    >
+                      Sort by
+                    </span>
+                  </div>
+
+                  <span
+                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                  >
+                    <!-- Heroicon name: solid/check -->
+                    <svg
+                      class="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </span>
+                </a>
+                <a
+                  class="block select-none relative py-2 pl-3 pr-9 hover:bg-indigo-100 hover:text-gray-900 cursor-pointer text-sm"
+                  role="menuitem"
+                  href="{% url 'courses' %}?q="
+                >
+                  <div class="flex items-center">
+                    <div
+                      class="flex-shrink-0 w-5 h-5 transition duration-300 ease-in-out bg-gray-100 rounded-sm animate-pulse"
+                    >
+                      <img
+                        alt="Alpine.js icon"
+                        class="opacity-0 rounded-sm object-cover object-center transition ease-in-out duration-300"
+                        data-src="/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaElCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--92b3f094017cc980b3b0230b9ff772625210705f/Alpine.js"
+                        data-lazy-loader-target="entry"
+                        src=""
+                      />
+                    </div>
+                    <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                    <span
+                      class="font-normal text-gray-700 hover:text-gray-900 ml-3 block truncate"
+                    >
+                      rating
+                    </span>
+                  </div>
+                </a>
+                <a
+                  class="block select-none relative py-2 pl-3 pr-9 hover:bg-indigo-100 hover:text-gray-900 cursor-pointer text-sm"
+                  role="menuitem"
+                  href="{% url 'courses' %}?q=price"
+                >
+                  <div class="flex items-center">
+                    <div
+                      class="flex-shrink-0 w-5 h-5 transition duration-300 ease-in-out bg-gray-100 rounded-sm animate-pulse"
+                    >
+                      <img
+                        alt="Angular icon"
+                        class="opacity-0 rounded-sm object-cover object-center transition ease-in-out duration-300"
+                        data-src="/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaFFCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--32256b181f1ff1aea0bc6aa234d19c657b1ff586/Angular"
+                        data-lazy-loader-target="entry"
+                        src=""
+                      />
+                    </div>
+                    <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                    <span
+                      class="font-normal text-gray-700 hover:text-gray-900 ml-3 block truncate"
+                    >
+                      price
+                    </span>
+                  </div>
+                </a>
+                <a
+                  class="block select-none relative py-2 pl-3 pr-9 hover:bg-indigo-100 hover:text-gray-900 cursor-pointer text-sm"
+                  role="menuitem"
+                  href="{% url 'courses' %}?q="
+                >
+                  <div class="flex items-center">
+                    <div
+                      class="flex-shrink-0 w-5 h-5 transition duration-300 ease-in-out bg-gray-100 rounded-sm animate-pulse"
+                    >
+                      <img
+                        alt="Astro icon"
+                        class="opacity-0 rounded-sm object-cover object-center transition ease-in-out duration-300"
+                        data-src="/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaUFEIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0143d0101bdd5428d3c69d2ff642b933bee0ebb5/Astro"
+                        data-lazy-loader-target="entry"
+                        src=""
+                      />
+                    </div>
+                    <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                    <span
+                      class="font-normal text-gray-700 hover:text-gray-900 ml-3 block truncate"
+                    >
+                      views
+                    </span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="max-w-lg px-4 pt-12 mx-auto md:max-w-screen-2xl md:px-6 xl:px-8 2xl:px-12"
+  >
+    <div data-controller="pagination lazy-loader">
+      <div
+        id="resources"
+        class="grid mx-auto gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-8 2xl:gap-x-12 2xl:gap-y-16 xl:gap-y-14"
+        >
+  
+        {% for course in courses %}
+        <div>
+          <div
+            class="flex flex-col w-full overflow-hidden bg-gray-100 rounded-2xl h-72 sm:h-80 md:h-72 lg:h-64 xl:h-80"
+          >
+            <div
+              class="relative flex items-center justify-center flex-shrink-0 h-full group"
+            >
+              <img
+                class="w-9/10 sm:w-10/12 lg:w-9/10 xl:w-10/12 h-auto rounded-lg shadow-md mx-auto object-cover object-left-top transition ease-in-out duration-300"
+                alt="Cube"
+                data-lazy-loader-target="entry"
+                src="{{course.thumbnail.url}}"
+              />
+              <div
+                class="absolute inset-0 transition duration-200 bg-gray-900 opacity-0 rounded-2xl group-hover:opacity-60"
+              ></div>
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center transition duration-200 opacity-0 group-hover:opacity-100"
+              >
+                <div class="mb-4 shadow-sm w-33 rounded-2xl">
+                  <a
+                    class="inline-flex w-full justify-center items-center px-6 py-2 shadow-sm border border-transparent text-sm font-medium rounded-2xl text-indigo-700 bg-white transition duration-150 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    target="_blank"
+                    href="/course/{{course.slug}}"
+                    >View details</a
+                  >
+                </div>
+                <div class="shadow-sm w-33 rounded-2xl">
+                  <a
+                    class="w-full justify-center inline-flex items-center px-6 py-2 border border-transparent text-sm font-medium rounded-2xl shadow-sm text-white transition duration-150 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    href="/resources/cube"
+                    > Enroll now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex flex-col justify-between flex-1 px-6 pt-6 pb-0">
+              <div class="flex-1">
+                <a class="block group" href="/resources/cube">
+                  <div class="flex items-center justify-between">
+                    <h3
+                      class="flex items-center text-xl font-bold leading-7 text-gray-900 group-hover:text-indigo-600"
+                    >
+                    {{course.name}}
+                    </h3>
+                    <span
+                      class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-bold font-display bg-indigo-200 text-indigo-800"
+                    >
+                    {{course.price|rupee}}
+                    </span>
+                  </div>
+                  <p class="mt-1 text-base font-medium leading-6 text-gray-500">
+                    {{course.description |slice:":50"}}..
+                  </p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+      <div id="pagination-button" class="flex justify-center mt-14">
+        <button
+          name="button"
+          type="button"
+          class="inline-flex items-center justify-center px-8 h-12 text-base font-medium text-indigo-700 border border-transparent rounded-2xl bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+          target="_blank"
+          data-action="click->pagination#loadMore"
+          data-pagination-target="next"
+          data-next-url="/?type=all&amp;page=2"
+          data-button-loader-target="button"
+          data-controller="button-loader"
+          data-button-loader-hidden-class="hidden"
+        >
+          <svg
+            class="hidden w-5 h-5 animate-spin text-indigo-500"
+            data-button-loader-target="loader"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          <span data-button-loader-target="text">Load more designs</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
