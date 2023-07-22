@@ -50,7 +50,11 @@
           </div>
           <p class="leading-relaxed py-4">{{course.description}}</p>
           <div class="flex py-3">
-            <span class="title-font font-medium text-2xl text-gray-900">{{course.price|rupee}}/-</span>
+            <div class="price">
+              <del class="font-medium text-xl text-gray-900">{{course.price|rupee}}</del>
+              &nbsp;
+              <span class="font-medium text-xl text-gray-900">{% cal_sellprice course.price course.discount as value %} {{value|rupee}}</span>
+          </div>
             <a href="?action=create_payment" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Buy now</a>
           </div>
         </div>
